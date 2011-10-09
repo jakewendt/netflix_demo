@@ -1,0 +1,136 @@
+
+URLs that seem to work without any user authentication
+
+/catalog/
+/catalog/titles
+/catalog/titles/
+/catalog/titles/index
+/catalog/titles/autocomplete
+
+/catalog/people/
+
+
+
+http://developer.netflix.com/docs/Common_Tasks#0_51188
+
+How To ...
+	
+
+Use ...
+
+Search for catalog titles
+	
+
+catalog/titles returns catalog title URLs (whose format is catalog/titles/12345678) which can be used in subsequent requests, such as queries for title details or requests to add titles to a queue. You use the search API resources as a source of titles that you then use with other API resources.
+
+Use the title expansion parameter expand=value to retrieve title details or links to details inline. The parameter values are title detail categories separated by commas, such as cast and directors. (See Understanding Resources for information on title expansion.)
+
+catalog/titles/autocomplete incorporates automatic completion in the title search. As the user enters a title to search for, lists of search terms matching the partial search text are returned. This allows you to give the user a list of suggested matches for search terms. The user can select from this list or continue typing to narrow the list choices.
+
+Retrieve title details
+	
+
+catalog/titles/12345678 and all catalog/titles movie and television series seasons subresources (see Retrieving Title Details.)
+
+Use the title expansion parameter expand=value to retrieve title details or links to details inline. The parameter values are title detail categories separated by commas, such as cast and directors. Title expansion brings the title details that are referenced by the parameter value(s) into the response itself.
+
+Retrieve similar titles
+	
+
+catalog/titles/12345678/similars
+
+Retrieve details about people associated with a title
+	
+
+Use the title expansion expand=cast,directors in catalog/titles search to retrieve links to details about cast members and directors inline. (Also see Understanding Resources.)
+
+Use the catalog/people/personID link entry included in the title response to retrieve details about specific individuals associated with the title.
+
+Access Netflix resources on behalf of a user
+	
+
+Security. section and OAuth API. Generally, a user must login for you to gain access to the user identifier, which you need for all other user-related tasks. However, the user may not have to login if they are cookied, but they still have to authorize the application to access the service on their behalf. Authorization is necessary for you to gain access to the user identifier, access token, and token secret.
+
+Get user details (name, associated queues, and preferred disc formats)
+	
+
+users/userID
+
+Access an RSS feed for a user
+	
+
+users/userID/feeds returns links (URLs) with the feeds available for the user. The necessary security tokens are embedded within these links, so you can access these feeds without any OAuth calls.
+
+Determine a subscriber's rental options for catalog titles
+	
+
+users/userID/title_states returns the relationship between a user's viewing options/queues and the availability of specific titles, along with the preferred action to add the title to the user's queue.
+
+Get information about a user's queue
+	
+
+users/userID/queues and subresources (see Managing Queues). Used for retrieving queue details (current titles, positions within queue, availability).
+
+Retrieve queue details with these API resources using the HTTP GET method.
+
+Manage titles in a user's queue
+	
+
+users/userID/queues/instant and users/userID/queues/disc used with the HTTP POST method let you update the queue (add titles or move within the queue). When you retrieve queue details using these API resources with the GET method, the response includes the URL of the queue entry for each item in the queue. You can pass these URLs to these resources with the POST or DELETE methods to update (add, move, or remove) the queue entries.
+
+Delete titles from a queue using these subresources with the HTTP DELETE method (see Updating a Queue):
+
+users/userID/queues/instant/available/entryID
+
+users/userID/queues/instant/saved/entryID
+
+users/userID/queues/disc/available/entryID
+
+users/userID/queues/disc/saved/entryID
+
+Determine titles shipped to a user but not yet returned to Netflix
+	
+
+users/userID/at_home
+
+Retrieve a user's rental history details
+	
+
+users/userID/rental_history and subresources (see Managing Rental History).
+
+Retrieve a list of discs shipped to a user, discs returned to Netflix, or titles that were watched instantly.
+
+Retrieve a user's actual ratings of titles and Netflix's prediction of the user's ratings
+	
+
+users/userID/ratings/title returns the actual and predicted ratings for the user. (See User Title Ratings.)
+
+users/userID/ratings/title/actual returns the actual rating given by a user for the specified title(s).
+
+users/userID/ratings/title/predicted returns predicted ratings for the user for the specified title(s).
+
+Create a rating of a title for a user and updating a user's existing rating of a title
+	
+
+users/userID/ratings/title/actual used with the HTTP POST method lets you create a user rating for an individual title.
+
+Returns the new rating in the URL users/userID/ratings/title/actual/ratingID.
+
+Use users/userID/ratings/title/actual/ratingID with the HTTP PUT method to update an existing rating.
+
+Retrieve reviews of titles
+	
+
+users/userID/reviews returns the user’s reviews or a specific review for the specified title(s).
+
+Retrieve title recommendations
+	
+
+users/userID/recommendations returns recommendations of other catalog titles for this user based on the user's rating and rental history.
+
+Retrieve an index of all Netflix catalog titles
+	
+
+catalog/titles/index
+
+This resource is intended for use by partners who have their own movie and television catalogs and wish to find matching titles in the Netflix catalog.

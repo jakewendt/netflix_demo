@@ -1,0 +1,10 @@
+Version 0.3
+- Refactor to seperate Model and API call
+- Add several attributes to title
+- Add tests
+- Add samples
+- Add readme
+
+Version 0.1
+- Spike of connectivity to catalog/title/index and catalog/title/search
+
